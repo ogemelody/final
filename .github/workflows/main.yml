@@ -1,10 +1,8 @@
 name: Deploy Lambda Function
 on:
   push:
-    branches: [ master]
-  pull_request:
-    branches: [ master ]
-  workflow_dispatch:
+    branches: [ main]
+ 
 
 jobs:
   release:
@@ -22,7 +20,7 @@ jobs:
         role-session-name: MySessionName
     - name: zip Lambda Function
       run: |
-          zip -r9 lambda.zip lambdaFunction.py
+          zip -r9 lambda.zip assert.py
     - name: AWS Deploy
       run: |
-          aws lambda update-function-code --function-name NameOfLambdaFunction --zip-file fileb://lambda.zip
+          aws lambda update-function-code --function-name deploy-sample --zip-file fileb://lambda.zip
